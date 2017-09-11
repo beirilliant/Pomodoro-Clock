@@ -14,12 +14,18 @@
     #main {
 
         margin-top: 100px;
+
     }
 
     h1 {
 
         margin-bottom: 50px;
     
+    }
+
+    span {
+
+        margin: 0 10px;
     }
 
     p {
@@ -29,6 +35,8 @@
     .col {
 
         border: 5px solid gold;
+        border-radius: 20px;
+        padding: 10px;
 
     }
 
@@ -51,26 +59,35 @@
 
         <h1>Pomodoro Clock</h1>
 
-        <div class="row">
+        <div class="container text-center">
 
-            <div class="col col-xs-auto text-success">
+            <div class="row justify-content-md-center">
 
-            <h2>Break</h2>
-            <p><span class="btn btn-success rounded">-</span>5<span class="btn btn-success rounded">+</span></p>
+                <div class="col col-lg-3 text-success">
+
+                    <h2>Break (min)</h2>
+                    <p><span class="btn btn-success rounded">-</span>5<span class="btn btn-success rounded">+</span></p>
+
+                </div>
+
+                <div class="col-12 col-md-auto">
+                </div>
+    
+                <div class="col col-lg-3 text-info">
+
+                    <h2>Session (min)</h2>  
+                    <p><span class="btn btn-info rounded">-</span>25<span class="btn btn-info rounded">+</span></p>
+
+                </div>
 
             </div>
 
-            <div class="col text-info">
+            <div class="container" id="display">
 
-            <h2>Session</h2>  
-            <p><span class="btn btn-info rounded">-</span> 25 <span class="btn btn-info rounded">+</span></p>
-
+                <h2>Session</h2>
 
             </div>
-        </div>
 
-        <div class="container" id="display">
-            <h2>Session</h2>
         </div>
 
     </div>
