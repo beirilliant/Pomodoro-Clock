@@ -161,7 +161,12 @@
                 count--;
                 var min = Math.floor(count / 60);
                 var sec = count % 60;
-                $("#displayTime").html(min + ":" + sec);
+
+                if (sec < 10) {
+                    $("#displayTime").html(min + ":0" + sec);
+                } else {
+                    $("#displayTime").html(min + ":" + sec);
+                }
 
                 if (count == 0) {
                     clearInterval(counter);
