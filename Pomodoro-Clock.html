@@ -98,8 +98,8 @@
                 <label>Session</label>
                 <p id="displayTime">25</p>
 
-                <button class="btn btn-lg btn-primary rounded">Start</button>
-                <button class="btn btn-lg btn-danger rounded">Stop</button>
+                <button class="btn btn-lg btn-primary rounded" id="startBtn">Start</button>
+                <button class="btn btn-lg btn-danger rounded" id="stopBtn">Stop</button>
 
             </div>
 
@@ -149,6 +149,26 @@
             iniSessionTime++;
             $("#sessionTime").html(iniSessionTime);
             $("#displayTime").html(iniSessionTime);
+        });
+
+
+        $("#startBtn").click(function () {
+            var count = iniSessionTime * 60;
+            var counter = setInterval(timer, 1000); //1000 will run it every 1 second
+
+
+            function timer() {
+                count--;
+                var min = Math.floor(count / 60);
+                var sec = count % 60;
+                $("#displayTime").html(min + ":" + sec);
+
+                if (count == 0) {
+                    clearInterval(counter);
+                    return;
+              } 
+           }
+
         });
 
     });
