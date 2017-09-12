@@ -95,7 +95,7 @@
 
             <div class="container" id="display">
 
-                <label>Session</label>
+                <label id="displayLabel">Session</label>
                 <p id="displayTime">25</p>
 
                 <button class="btn btn-lg btn-primary rounded" id="startBtn">Start</button>
@@ -153,9 +153,9 @@
 
 
         $("#startBtn").click(function () {
+            var isSession = 1;
             var count = iniSessionTime * 60;
             var counter = setInterval(timer, 1000); //1000 will run it every 1 second
-
 
             function timer() {
                 count--;
@@ -168,11 +168,25 @@
                     $("#displayTime").html(min + ":" + sec);
                 }
 
-                if (count == 0) {
+                if (count == 0 && isSession == 1) {
                     clearInterval(counter);
-                    return;
-              } 
-           }
+                    $("#displayLabel").html("Break");
+                    isSession = 0;
+                    count = iniBreakTime * 60;
+                    counter = setInterval(timer, 1000);
+                }
+
+                if (count == 0 && isSession == 0) {
+                    clearInterval(counter);
+                    $("#displayLabel").html("Session");
+                    isSession = 1;
+                    count = iniSessionTime * 60;
+                    counter = setInterval(timer, 1000);
+
+                }
+
+            }
+
 
         });
 
