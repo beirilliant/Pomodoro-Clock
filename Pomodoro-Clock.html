@@ -118,8 +118,10 @@
     <script type="text/javascript">
     $(document).ready(function() {
         var start = 0;
+        var startClick = 0;
         var iniBreakTime = 5;
         var iniSessionTime = 25;
+        var count = iniSessionTime * 60;
 
         $("#bMinus").click(function() { 
             iniBreakTime--;
@@ -153,12 +155,33 @@
 
 
         $("#startBtn").click(function () {
+
+            if (startClick == 0) {
+
+                startClick = 1;
+                $("#startBtn").html("Pause");
+
+            } else {
+
+                startClick = 0;
+                $("#startBtn").html("Start");
+
+            }
+
             start = 1;
+
             var isSession = 1;
-            var count = iniSessionTime * 60;
+            
             var counter = setInterval(timer, 1000); //1000 will run it every 1 second
 
+
             function timer() {
+
+                if (startClick == 0) {
+
+                    clearInterval(counter);
+                    return
+                }
 
                 count--;
                 var min = Math.floor(count / 60);
@@ -191,9 +214,9 @@
                     clearInterval(counter);
                     $("#displayLabel").html("Session");
                     $("#displayTime").html(iniSessionTime);
+                    count = iniSessionTime * 60;
                     return
                 }
-
 
             }
 
@@ -201,6 +224,7 @@
 
         $("#stopBtn").click(function() {
             start = 0;
+            startClick = 0;
 
         });
 
