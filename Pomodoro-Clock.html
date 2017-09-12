@@ -121,7 +121,7 @@
         var startClick = 0;
         var iniBreakTime = 5;
         var iniSessionTime = 25;
-        var count = iniSessionTime * 60;
+        var num = 0; // Initial state when "start" btn is not clicked after page load is complete
 
         $("#bMinus").click(function() { 
             iniBreakTime--;
@@ -155,6 +155,15 @@
 
 
         $("#startBtn").click(function () {
+
+            if (num == 0) {
+
+                count = iniSessionTime * 60;
+                num++;
+            } else {
+
+                num++;
+            }
 
             if (startClick == 0) {
 
@@ -214,6 +223,7 @@
 
             }
 
+
         });
 
         $("#stopBtn").click(function() {
@@ -221,7 +231,7 @@
             startClick = 0;
             iniBreakTime = 5;
             iniSessionTime = 25;
-            count = iniSessionTime * 60;
+            num = 0;
             $("#displayLabel").html("Session");
             $("#displayTime").html(iniSessionTime);
             $("#breakTime").html(iniBreakTime);
