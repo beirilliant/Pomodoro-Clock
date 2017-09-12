@@ -117,7 +117,7 @@
   
     <script type="text/javascript">
     $(document).ready(function() {
-
+        var start = 0;
         var iniBreakTime = 5;
         var iniSessionTime = 25;
 
@@ -153,11 +153,13 @@
 
 
         $("#startBtn").click(function () {
+            start = 1;
             var isSession = 1;
             var count = iniSessionTime * 60;
             var counter = setInterval(timer, 1000); //1000 will run it every 1 second
 
             function timer() {
+
                 count--;
                 var min = Math.floor(count / 60);
                 var sec = count % 60;
@@ -185,8 +187,20 @@
 
                 }
 
+                if (start == 0) {
+                    clearInterval(counter);
+                    $("#displayLabel").html("Session");
+                    $("#displayTime").html(iniSessionTime);
+                    return
+                }
+
+
             }
 
+        });
+
+        $("#stopBtn").click(function() {
+            start = 0;
 
         });
 
