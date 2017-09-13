@@ -8,23 +8,17 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
     <style type="text/css">
 
     #main {
-
         margin-top: 80px;
-
     }
 
     h1 {
-
         margin-bottom: 50px;
-    
     }
 
     span {
-
         margin: 0 15px;
     }
 
@@ -33,31 +27,25 @@
     }
 
     .col {
-
         border: 5px solid gold;
         border-radius: 20px;
         padding: 10px;
-
     }
 
     #display {
-
         margin-top: 50px;
         padding-top: 20px;
         width: 300px;
         height: 300px;
         border-radius: 10%;
         border: 5px solid gold;
-
     }
 
     label {
-
         font-size: 200%;
     }
 
     #displayTime {
-
         font-size: 600%;
     }
 
@@ -67,48 +55,33 @@
   <body>
 
     <div class="container text-center" id="main">
-
         <h1>Pomodoro Clock</h1>
 
         <div class="container text-center">
-
             <div class="row justify-content-md-center">
-
                 <div class="col col-lg-3 text-success">
-
                     <h2>Break (min)</h2>
                     <p><span class="btn btn-success rounded" id="bMinus">-</span><span id="breakTime">5</span><span class="btn btn-success rounded" id="bPlus">+</span></p>
-
                 </div>
 
                 <div class="col-12 col-md-auto">
                 </div>
     
                 <div class="col col-lg-3 text-info">
-
                     <h2>Session (min)</h2>  
                     <p><span class="btn btn-info rounded" id="sMinus">-</span><span id="sessionTime">25</span><span class="btn btn-info rounded" id="sPlus">+</span></p>
-
                 </div>
-
             </div>
 
             <div class="container" id="display">
-
                 <label id="displayLabel">Session</label>
                 <p id="displayTime">25</p>
-
                 <button class="btn btn-lg btn-primary rounded" id="startBtn">Start</button>
                 <button class="btn btn-lg btn-danger rounded" id="stopBtn">Stop</button>
-
             </div>
-
         </div>
-
     </div>
     
-   
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -117,11 +90,11 @@
   
     <script type="text/javascript">
     $(document).ready(function() {
-        var start = 0;
-        var startClick = 0;
-        var iniBreakTime = 5;
-        var iniSessionTime = 25;
-        var num = 0; // Initial state when "start" btn is not clicked after page load is complete
+        var start = 0; // 0: Initial state when page loads complete; 1: Countdown is running.
+        var startClick = 0; // Check whether "Start" is clicked. 0: no; 1: yes.
+        var iniBreakTime = 5; // Initial break time in minutes
+        var iniSessionTime = 25; // Initial session time in minutes
+        var num = 0; // Number of clicks for "Start" button.
 
         $("#bMinus").click(function() {
             if (start == 1) {
@@ -168,39 +141,29 @@
 
         $("#startBtn").click(function () {
 
+            // Check if countdown runs for the first time, or resumes from a paused state.
             if (num == 0) {
-
-                count = iniSessionTime * 60;
+                count = iniSessionTime * 60; // Reset initial session time if countdown runs for the first time, or after "Stop" is clicked.
                 num++;
-
             } else {
-
                 num++;
             }
 
             if (startClick == 0) {
-
                 startClick = 1;
                 $("#startBtn").html("Pause");
-
             } else {
-
                 startClick = 0;
                 $("#startBtn").html("Start");
-
             }
 
             start = 1;
-
-            var isSession = 1;
-
+            var isSession = 1; // 1: session period; 0: break period
             var counter = setInterval(timer, 1000); //1000 will run it every 1 second
-
 
             function timer() {
 
                 if (startClick == 0 || start == 0) {
-
                     clearInterval(counter);
                     return
                 }
@@ -229,14 +192,8 @@
                     isSession = 1;
                     count = iniSessionTime * 60;
                     counter = setInterval(timer, 1000);
-
                 }
-
-
-
             }
-
-
         });
 
         $("#stopBtn").click(function() {
@@ -250,10 +207,7 @@
             $("#breakTime").html(iniBreakTime);
             $("#sessionTime").html(iniSessionTime);
             $("#startBtn").html("Start");
-
-
         });
-
     });
 
     </script>
