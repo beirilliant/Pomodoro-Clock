@@ -18,15 +18,15 @@
         margin-bottom: 50px;
     }
 
-    span {
-        margin: 0 15px;
+    button {
+       margin-top: 5px;
     }
 
     p {
         font-size: 200%;
     }
 
-    .col {
+    .col-lg-3 {
         border: 5px solid gold;
         border-radius: 20px;
         padding: 10px;
@@ -61,15 +61,45 @@
             <div class="row justify-content-md-center">
                 <div class="col col-lg-3 text-success">
                     <h2>Break (min)</h2>
-                    <p><span class="btn btn-success rounded" id="bMinus">-</span><span id="breakTime">5</span><span class="btn btn-success rounded" id="bPlus">+</span></p>
+
+                    <div class="row justify-content-md-center">
+
+                        <div class="col">
+                            <button class="btn btn-success rounded" id="bMinus">-</button>
+                        </div>
+
+                        <div class="col-12 col-md-auto">
+                            <p id="breakTime">5</p>
+                        </div>
+
+                        <div class="col">
+                            <button class="btn btn-success rounded" id="bPlus">+</button>
+                        </div>
+
+                    </div>
+             
                 </div>
 
                 <div class="col-12 col-md-auto">
                 </div>
     
                 <div class="col col-lg-3 text-info">
-                    <h2>Session (min)</h2>  
-                    <p><span class="btn btn-info rounded" id="sMinus">-</span><span id="sessionTime">25</span><span class="btn btn-info rounded" id="sPlus">+</span></p>
+                    <h2>Session (min)</h2>
+                    <div class="row justify-content-md-center">
+                            
+                        <div class="col">
+                            <button class="btn btn-info rounded" id="sMinus">-</button>
+                        </div>
+                            
+                        <div class="col-12 col-md-auto">
+                            <p id="sessionTime">25</p>
+                        </div>
+                            
+                        <div class="col">
+                            <button class="btn btn-info rounded" id="sPlus">+</button>
+                        </div>                           
+                    </div> 
+                  
                 </div>
             </div>
 
