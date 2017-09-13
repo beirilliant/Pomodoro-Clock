@@ -126,10 +126,50 @@
         var iniSessionTime = 25; // Initial session time in minutes
         var num = 0; // Number of clicks for "Start" button.
 
-        $("#bMinus").click(function() {
-            if (start == 1) {
+        function resetDisplay() {  // RESETDISPLAY function to reset the display to the initial state.
+            $("#displayLabel").html("Session");
+            $("#displayTime").html(iniSessionTime);
+            $("#breakTime").html(iniBreakTime);
+            $("#sessionTime").html(iniSessionTime);
+            $("#startBtn").html("Start");
+        }
+
+        function stop() {  //STOP function when "Stop" is clicked.
+            start = 0;
+            startClick = 0;
+            iniBreakTime = 5;
+            iniSessionTime = 25;
+            num = 0;
+            resetDisplay();
+        }
+
+        function resetWhenPause() {  // RESETWHENPAUSE function to check status and reset (and stop) when +/- button is clicked at the pause state of the countdown.
+            if (start == 1 && num % 2 == 0 && num !== 0) {
+                start = 0;
+                startClick = 0;
+                num = 0;
+                resetDisplay();
+            }
+
+            if (start == 1 && num % 2 == 1) {
                 return
             }
+        }
+
+        function isStart() {  // ISSTART function to check if countdown starts
+            if (start == 1) {
+                return
+            }   
+        }
+
+        function displaySession() {
+            $("#sessionTime").html(iniSessionTime);
+            $("#displayTime").html(iniSessionTime);
+        }
+
+        $("#bMinus").click(function() {
+            resetWhenPause();
+            isStart();
             iniBreakTime--;
             if (iniBreakTime < 1) {
                 iniBreakTime++;
@@ -139,38 +179,31 @@
         });
 
         $("#bPlus").click(function() {
-            if (start == 1) {
-                return
-            }
+            resetWhenPause();
+            isStart();
             iniBreakTime++;
             $("#breakTime").html(iniBreakTime);
         });
 
         $("#sMinus").click(function() {
-            if (start == 1) {
-                return
-            }           
+            resetWhenPause();
+            isStart();         
             iniSessionTime--;
             if (iniSessionTime < 1) {
                 iniSessionTime++;
                 return
             }
-            $("#sessionTime").html(iniSessionTime);
-            $("#displayTime").html(iniSessionTime);
+            displaySession();
         });
 
         $("#sPlus").click(function() {
-            if (start == 1) {
-                return
-            }           
+            resetWhenPause();
+            isStart();          
             iniSessionTime++;
-            $("#sessionTime").html(iniSessionTime);
-            $("#displayTime").html(iniSessionTime);
+            displaySession();
         });
 
-
         $("#startBtn").click(function () {
-
             // Check if countdown runs for the first time, or resumes from a paused state.
             if (num == 0) {
                 count = iniSessionTime * 60; // Reset initial session time if countdown runs for the first time, or after "Stop" is clicked.
@@ -227,16 +260,7 @@
         });
 
         $("#stopBtn").click(function() {
-            start = 0;
-            startClick = 0;
-            iniBreakTime = 5;
-            iniSessionTime = 25;
-            num = 0;
-            $("#displayLabel").html("Session");
-            $("#displayTime").html(iniSessionTime);
-            $("#breakTime").html(iniBreakTime);
-            $("#sessionTime").html(iniSessionTime);
-            $("#startBtn").html("Start");
+            stop();
         });
     });
 
