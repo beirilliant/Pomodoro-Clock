@@ -9,29 +9,23 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <style type="text/css">
-
     #main {
         margin-top: 80px;
     }
-
     h1 {
         margin-bottom: 50px;
     }
-
     button {
        margin-top: 5px;
     }
-
     p {
         font-size: 200%;
     }
-
     .col-lg-3 {
         border: 5px solid gold;
         border-radius: 20px;
         padding: 10px;
     }
-
     #display {
         margin-top: 50px;
         padding-top: 20px;
@@ -40,15 +34,12 @@
         border-radius: 10%;
         border: 5px solid gold;
     }
-
     label {
         font-size: 200%;
     }
-
     #displayTime {
         font-size: 600%;
     }
-
     </style>
   </head>
 
@@ -144,22 +135,12 @@
         }
 
         function resetWhenPause() {  // RESETWHENPAUSE function to check status and reset (and stop) when +/- button is clicked at the pause state of the countdown.
-            if (start == 1 && num % 2 == 0 && num !== 0) {
+            if (start == 1 && num % 2 == 0) {
                 start = 0;
                 startClick = 0;
                 num = 0;
                 resetDisplay();
             }
-
-            if (start == 1 && num % 2 == 1) {
-                return
-            }
-        }
-
-        function isStart() {  // ISSTART function to check if countdown starts
-            if (start == 1) {
-                return
-            }   
         }
 
         function displaySession() {
@@ -168,37 +149,53 @@
         }
 
         $("#bMinus").click(function() {
+            if (start == 1 && num % 2 == 1) {
+                return
+            }
+
             resetWhenPause();
-            isStart();
             iniBreakTime--;
+
             if (iniBreakTime < 1) {
                 iniBreakTime++;
                 return
             }
+
             $("#breakTime").html(iniBreakTime);
         });
 
         $("#bPlus").click(function() {
+            if (start == 1 && num % 2 == 1) {
+                return
+            }
+
             resetWhenPause();
-            isStart();
             iniBreakTime++;
             $("#breakTime").html(iniBreakTime);
         });
 
         $("#sMinus").click(function() {
-            resetWhenPause();
-            isStart();         
+            if (start == 1 && num % 2 == 1) {
+                return
+            }
+
+            resetWhenPause();      
             iniSessionTime--;
+
             if (iniSessionTime < 1) {
                 iniSessionTime++;
                 return
             }
+
             displaySession();
         });
 
         $("#sPlus").click(function() {
-            resetWhenPause();
-            isStart();          
+            if (start == 1 && num % 2 == 1) {
+                return
+            }
+
+            resetWhenPause();        
             iniSessionTime++;
             displaySession();
         });
@@ -223,9 +220,8 @@
             start = 1;
             var isSession = 1; // 1: session period; 0: break period
             var counter = setInterval(timer, 1000); //1000 will run it every 1 second
-
+            
             function timer() {
-
                 if (startClick == 0 || start == 0) {
                     clearInterval(counter);
                     return
@@ -263,7 +259,7 @@
             stop();
         });
     });
-
+    
     </script>
 </body>
 </html>
