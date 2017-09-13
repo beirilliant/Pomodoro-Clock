@@ -123,7 +123,10 @@
         var iniSessionTime = 25;
         var num = 0; // Initial state when "start" btn is not clicked after page load is complete
 
-        $("#bMinus").click(function() { 
+        $("#bMinus").click(function() {
+            if (start == 1) {
+                return
+            }
             iniBreakTime--;
             if (iniBreakTime < 1) {
                 iniBreakTime++;
@@ -133,11 +136,17 @@
         });
 
         $("#bPlus").click(function() {
+            if (start == 1) {
+                return
+            }
             iniBreakTime++;
             $("#breakTime").html(iniBreakTime);
         });
 
-        $("#sMinus").click(function() {           
+        $("#sMinus").click(function() {
+            if (start == 1) {
+                return
+            }           
             iniSessionTime--;
             if (iniSessionTime < 1) {
                 iniSessionTime++;
@@ -147,7 +156,10 @@
             $("#displayTime").html(iniSessionTime);
         });
 
-        $("#sPlus").click(function() {           
+        $("#sPlus").click(function() {
+            if (start == 1) {
+                return
+            }           
             iniSessionTime++;
             $("#sessionTime").html(iniSessionTime);
             $("#displayTime").html(iniSessionTime);
@@ -160,6 +172,7 @@
 
                 count = iniSessionTime * 60;
                 num++;
+
             } else {
 
                 num++;
